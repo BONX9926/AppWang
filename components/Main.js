@@ -13,31 +13,43 @@ import {
   Image
 } from 'react-native';
 
-
-export default class Main extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Main</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgb(32, 50, 70)',
+import { TabNavigator } from 'react-navigation'
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import HomeScreen from '../tabs/HomeScreen'
+import SettingScreen from '../tabs/SettingScreen'
+export default TabNavigator(
+  {
+    Home: { 
+      screen: HomeScreen
+    },
+    Settings: {
+      screen :SettingScreen
+    },
   },
-  logo: {
-    width: 128,
-    height: 50
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: 'white'
+  {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Settings') {
+          iconName = `ios-options${focused ? '' : '-outline'}`;
+        }
+
+        // You can return any component that you like here! We usually use an
+        // icon component from react-native-vector-icons
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: '#000',
+      style: {
+        backgroundColor: '#fff',
+      },
+    },
   }
-});
+)
+
