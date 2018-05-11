@@ -23,7 +23,7 @@ export default TabNavigator(
       screen: HomeScreen
     },
     Settings: {
-      screen :SettingScreen
+      screen :SettingScreen,
     },
   },
   {
@@ -32,7 +32,7 @@ export default TabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Home') {
-          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+          iconName = `ios-home${focused ? '' : '-outline'}`;
         } else if (routeName === 'Settings') {
           iconName = `ios-options${focused ? '' : '-outline'}`;
         }
@@ -46,9 +46,22 @@ export default TabNavigator(
     tabBarOptions: {
       activeTintColor: 'tomato',
       inactiveTintColor: '#000',
+      showIcon: true,
+      showLabel: false,
+      inactiveBackgroundColor : '#fff',
+      iconStyle: {
+          width: 35,
+          height: 60
+      },
+      tabStyle: {
+          height: 40
+      },
       style: {
         backgroundColor: '#fff',
       },
+      indicatorStyle: {
+        backgroundColor: 'white',
+      },//line active and set
     },
   }
 )
