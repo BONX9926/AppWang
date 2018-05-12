@@ -10,15 +10,20 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
 } from 'react-native';
-
+import { Container, Content } from 'native-base';
+import Card from '../tabs/CardScreen';
 export default class HomeScreen extends Component {
+  click() { }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Main</Text>
-      </View>
+      <Container>
+        <Content>
+          <Card likes="100"/>
+          <Card likes="80"/>
+          <Card likes="99"/>
+        </Content>
+      </Container>
     );
   }
 }
@@ -26,18 +31,8 @@ export default class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgb(32, 50, 70)',
-  },
-  logo: {
-    width: 128,
-    height: 50
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: 'white'
+    justifyContent: 'center'
   }
 });
 
