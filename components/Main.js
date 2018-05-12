@@ -16,14 +16,18 @@ import {
 import { TabNavigator } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../tabs/HomeScreen'
-import SettingScreen from '../tabs/SettingScreen'
+import SearchScreen from '../tabs/SearchScreen'
+import MapsScreen from '../tabs/MapsScreen'
 export default TabNavigator(
   {
     Home: { 
       screen: HomeScreen
     },
-    Settings: {
-      screen :SettingScreen,
+    Search: {
+      screen : SearchScreen,
+    },
+    Maps: {
+      screen : MapsScreen,
     },
   },
   {
@@ -33,8 +37,10 @@ export default TabNavigator(
         let iconName;
         if (routeName === 'Home') {
           iconName = `ios-home${focused ? '' : '-outline'}`;
-        } else if (routeName === 'Settings') {
-          iconName = `ios-options${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Search') {
+          iconName = `ios-search${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Maps') {
+          iconName = `ios-map${focused ? '' : '-outline'}`;
         }
 
         // You can return any component that you like here! We usually use an
@@ -43,18 +49,19 @@ export default TabNavigator(
       },
     }),
     tabBarPosition: 'bottom',
+    swipeEnabled: false,
     tabBarOptions: {
-      activeTintColor: 'tomato',
+      activeTintColor: '#000',
       inactiveTintColor: '#000',
       showIcon: true,
       showLabel: false,
       inactiveBackgroundColor : '#fff',
       iconStyle: {
-          width: 35,
-          height: 60
+        width: 35,
+        height: 60
       },
       tabStyle: {
-          height: 40
+        height: 40
       },
       style: {
         backgroundColor: '#fff',

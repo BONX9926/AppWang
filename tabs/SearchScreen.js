@@ -13,11 +13,11 @@ import {
   Image
 } from 'react-native';
 
-export default class SettingScreen extends Component {
+export default class SearchScreen extends Component {
   render() {
     return (
       <View>
-        <Text>SettingScreen</Text>
+        <Text>SearchScreen</Text>
       </View>
     );
   }
