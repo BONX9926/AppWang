@@ -1,19 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
   Text,
   View,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import { Container, Content } from 'native-base';
 import Card from '../tabs/CardScreen';
+
 export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +18,8 @@ export default class HomeScreen extends Component {
     return fetch('http://nisakorn.com/student/chanika/index.php/api/getwang')
       .then((response) => response.json())
       .then((responseJson) => {
-
+        console.warn('api', responseJson);
+        
         this.setState({
           isLoading: false,
           dataSource: responseJson,
@@ -36,6 +32,23 @@ export default class HomeScreen extends Component {
         console.error(error);
       });
   }
+
+
+  cardRender() {
+    return this.state.dataSource.map( (data, index) => {
+      return (
+        <Card 
+          key={index}
+          api_id={data.api_id}
+          title={data.title}
+          img={data.img}
+          detail={data.detail}
+          lat={data.lat}
+          lng={data.lng}
+        />
+      )
+    });
+  }
   render() {
     if (this.state.isLoading) {
       return (
@@ -47,9 +60,7 @@ export default class HomeScreen extends Component {
     return (
       <Container>
         <Content>
-          <Card likes="100" />
-          <Card likes="80" />
-          <Card likes="99" />
+          {this.cardRender()}
         </Content>
       </Container>
     );

@@ -1,16 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon } from 'native-base'
 export default class CardScreen extends Component {
@@ -20,41 +15,41 @@ export default class CardScreen extends Component {
       <Card>
         <CardItem>
           <Left>
-            {/* <Thumbnail source={require('../assets/me.jpg')} /> */}
             <Body>
-              <Text>Varun </Text>
-              <Text note>Jan 15, 2018</Text>
+              <Text>{this.props.title}</Text>
+              <Text note>
+                <Text style={{ fontWeight: "900" }}>ก่อตั้งเมื่อ :</Text>
+                Jan 15, 2018
+              </Text>
             </Body>
           </Left>
         </CardItem>
         <CardItem cardBody>
-        <Text style={{ height: 200, width: null, flex: 1 }}></Text>
-          {/* <Image source={images[this.props.imageSource]} style={{ height: 200, width: null, flex: 1 }} /> */}
+          {/* <Text style={{ height: 200, width: null, flex: 1 }}>{this.props.img}</Text> */}
+          <Image source={{uri: 'https://img.kapook.com/u/2016/suppaporn/bkk/temple/temple01.jpg'}} style={{ height: 200, width: null, flex: 1 }} />
         </CardItem>
         <CardItem style={{ height: 45 }}>
           <Left>
             <TouchableOpacity style={styles.icons} transparent>
-              <Icon name="ios-heart-outline" style={{ fontSize: 20, color: 'black' }} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.icons} transparent>
-              <Icon name="ios-chatbubbles-outline" style={{ fontSize: 20, color: 'black' }} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.icons} transparent>
-              <Icon name="ios-send-outline" style={{ fontSize: 20, color: 'black' }} />
+              <Text>
+                1
+                <Icon name="ios-eye-outline" style={{ fontSize: 20, color: 'black' }} />
+              </Text>
             </TouchableOpacity>
           </Left>
         </CardItem>
 
         <CardItem style={{ height: 20 }}>
-          <Text>{this.props.likes} likes</Text>
+          <Text>ID :{this.props.api_id}</Text>
         </CardItem>
         <CardItem>
           <Body>
             <Text>
-              <Text style={{ fontWeight: "900" }}>varun
-                  </Text>
-              Ea do Lorem occaecat laborum do. Minim ullamco ipsum minim eiusmod dolore cupidatat magna exercitation amet proident qui. Est do irure magna dolor adipisicing do quis labore excepteur. Commodo veniam dolore cupidatat nulla consectetur do nostrud ea cupidatat ullamco labore. Consequat ullamco nulla ullamco minim.
-              </Text>
+              <Text style={{ fontWeight: "900" }}>varun</Text>
+              <Text>Lat: {this.props.lat}</Text>
+              <Text>Lat: {this.props.lng}</Text>
+              <Text>Detail: {this.props.detail}</Text>
+            </Text>
           </Body>
         </CardItem>
       </Card>
