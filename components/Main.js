@@ -7,15 +7,29 @@ import {
   Image
 } from 'react-native';
 
-import { TabNavigator } from 'react-navigation'
+import { TabNavigator, StackNavigator } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeScreen from '../tabs/HomeScreen'
-import SearchScreen from '../tabs/SearchScreen'
-import MapsScreen from '../tabs/MapsScreen'
+import HomeScreen from '../tabs/HomeScreen';
+import SearchScreen from '../tabs/SearchScreen';
+import MapsScreen from '../tabs/MapsScreen';
+import DetailsScreen from '../tabs/DetailsScreen';
+
+const HomeStack = StackNavigator({
+  Home: {
+    screen: HomeScreen
+  },
+  Details: {
+    screen: DetailsScreen,
+    navigationOptions: ({ }) => ({
+      title: `Haha`,
+    }),
+  }
+})
+
 export default TabNavigator(
   {
     Home: { 
-      screen: HomeScreen
+      screen: HomeStack
     },
     Search: {
       screen : SearchScreen,

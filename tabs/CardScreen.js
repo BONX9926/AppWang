@@ -9,14 +9,18 @@ import {
 } from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon } from 'native-base'
 export default class CardScreen extends Component {
-
+  onLearnMore = () => {
+    this.props.navigation.navigate('Details');
+  };
   render() {
     return (
       <Card>
         <CardItem>
           <Left>
             <Body>
-              <Text>{this.props.title}</Text>
+              <TouchableOpacity>
+                <Text onPress={() => this.onLearnMore()}>{this.props.title}</Text>
+              </TouchableOpacity>
               <Text note>
                 <Text style={{ fontWeight: "900" }}>ก่อตั้งเมื่อ :</Text>
                 Jan 15, 2018
@@ -26,7 +30,7 @@ export default class CardScreen extends Component {
         </CardItem>
         <CardItem cardBody>
           {/* <Text style={{ height: 200, width: null, flex: 1 }}>{this.props.img}</Text> */}
-          <Image source={{uri: 'https://img.kapook.com/u/2016/suppaporn/bkk/temple/temple01.jpg'}} style={{ height: 200, width: null, flex: 1 }} />
+          <Image source={{ uri: 'https://img.kapook.com/u/2016/suppaporn/bkk/temple/temple01.jpg' }} style={{ height: 200, width: null, flex: 1 }} />
         </CardItem>
         <CardItem style={{ height: 45 }}>
           <Left>

@@ -5,9 +5,12 @@ import {
   Text,
   View,
   ActivityIndicator,
+  TouchableOpacity,
+  Image
 } from 'react-native';
-import { Container, Content } from 'native-base';
-import Card from '../tabs/CardScreen';
+import { Container, Content, Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon } from 'native-base'
+// import { Container, Content } from 'native-base';
+// import Card from '../tabs/CardScreen';
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -18,8 +21,7 @@ export default class HomeScreen extends Component {
     return fetch('http://nisakorn.com/student/chanika/index.php/api/getwang')
       .then((response) => response.json())
       .then((responseJson) => {
-        console.warn('api', responseJson);
-        
+
         this.setState({
           isLoading: false,
           dataSource: responseJson,
@@ -34,21 +36,24 @@ export default class HomeScreen extends Component {
   }
 
 
-  cardRender() {
-    return this.state.dataSource.map( (data, index) => {
-      return (
-        <Card 
-          key={index}
-          api_id={data.api_id}
-          title={data.title}
-          img={data.img}
-          detail={data.detail}
-          lat={data.lat}
-          lng={data.lng}
-        />
-      )
-    });
-  }
+  // cardRender() {
+  //   return this.state.dataSource.map((data, index) => {
+  //     return (
+  //       <Card
+  //         key={index}
+  //         api_id={data.api_id}
+  //         title={data.title}
+  //         img={data.img}
+  //         detail={data.detail}
+  //         lat={data.lat}
+  //         lng={data.lng}
+  //       />
+  //     )
+  //   });
+  // }
+  onLearnMore = () => {
+    this.props.navigation.navigate('Details');
+  };
   render() {
     if (this.state.isLoading) {
       return (
@@ -60,7 +65,55 @@ export default class HomeScreen extends Component {
     return (
       <Container>
         <Content>
-          {this.cardRender()}
+          {
+            this.state.dataSource.map((data, index) => {
+              return (
+                <Card key={index}>
+                  <CardItem>
+                    <Left>
+                      <Body>
+                        <TouchableOpacity>
+                          <Text onPress={() => this.onLearnMore()}>{data.title}</Text>
+                        </TouchableOpacity>
+                        <Text note>
+                          <Text style={{ fontWeight: "900" }}>ก่อตั้งเมื่อ :</Text>
+                          Jan 15, 2018
+                  </Text>
+                      </Body>
+                    </Left>
+                  </CardItem>
+                  <CardItem cardBody>
+                    {/* <Text style={{ height: 200, width: null, flex: 1 }}>{data.img}</Text> */}
+                    <Image source={{ uri: 'https://img.kapook.com/u/2016/suppaporn/bkk/temple/temple01.jpg' }} style={{ height: 200, width: null, flex: 1 }} />
+                  </CardItem>
+                  <CardItem style={{ height: 45 }}>
+                    <Left>
+                      <TouchableOpacity style={styles.icons} transparent>
+                        <Text>
+                          1
+                    <Icon name="ios-eye-outline" style={{ fontSize: 20, color: 'black' }} />
+                        </Text>
+                      </TouchableOpacity>
+                    </Left>
+                  </CardItem>
+
+                  <CardItem style={{ height: 20 }}>
+                    <Text>ID :{data.api_id}</Text>
+                  </CardItem>
+                  <CardItem>
+                    <Body>
+                      <Text>
+                        <Text style={{ fontWeight: "900" }}>varun</Text>
+                        <Text>Lat: {data.lat}</Text>
+                        <Text>Lat: {data.lng}</Text>
+                        <Text>Detail: {data.detail}</Text>
+                      </Text>
+                    </Body>
+                  </CardItem>
+                </Card>
+              )
+            })
+          }
         </Content>
       </Container>
     );
