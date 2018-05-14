@@ -51,8 +51,8 @@ export default class HomeScreen extends Component {
   //     )
   //   });
   // }
-  onLearnMore = () => {
-    this.props.navigation.navigate('Details');
+  onLearnMore = (data) => {
+    this.props.navigation.navigate('Details', { ...data });
   };
   render() {
     if (this.state.isLoading) {
@@ -72,19 +72,20 @@ export default class HomeScreen extends Component {
                   <CardItem>
                     <Left>
                       <Body>
-                        <TouchableOpacity>
-                          <Text onPress={() => this.onLearnMore()}>{data.title}</Text>
+                        <TouchableOpacity onPress={() => this.onLearnMore(data)} transparent>
+                          <Text style={{ fontWeight: "900" }}>{data.title}</Text>
                         </TouchableOpacity>
                         <Text note>
-                          <Text style={{ fontWeight: "900" }}>ก่อตั้งเมื่อ :</Text>
+                          <Text style={{ fontWeight: "400" }}>ก่อตั้งเมื่อ :</Text>
                           Jan 15, 2018
-                  </Text>
+                        </Text>
                       </Body>
                     </Left>
                   </CardItem>
                   <CardItem cardBody>
                     {/* <Text style={{ height: 200, width: null, flex: 1 }}>{data.img}</Text> */}
                     <Image source={{ uri: 'https://img.kapook.com/u/2016/suppaporn/bkk/temple/temple01.jpg' }} style={{ height: 200, width: null, flex: 1 }} />
+
                   </CardItem>
                   <CardItem style={{ height: 45 }}>
                     <Left>

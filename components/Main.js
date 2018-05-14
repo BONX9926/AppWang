@@ -16,12 +16,15 @@ import DetailsScreen from '../tabs/DetailsScreen';
 
 const HomeStack = StackNavigator({
   Home: {
-    screen: HomeScreen
+    screen: HomeScreen,
+    navigationOptions: {
+      title: '//ang',
+    },
   },
   Details: {
     screen: DetailsScreen,
-    navigationOptions: ({ }) => ({
-      title: `Haha`,
+    navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.title}`,
     }),
   }
 })
