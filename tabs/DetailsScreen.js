@@ -4,13 +4,17 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  Button
 } from 'react-native';
 
+
 export default class DetailsScreen extends Component {
+
   render() {
     console.warn('params', this.props.navigation.state.params);
     const { api_id, title, detail, img, lat, lng } = this.props.navigation.state.params;
+    
     return (
       <View style={{ flex: 1, position: 'absolute', height: 200 , width: 'auto', backgroundColor: 'white'}}>
         <View style={{ flex: 2, backgroundColor: 'black' }}>
