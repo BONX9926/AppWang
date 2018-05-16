@@ -41,7 +41,7 @@ export default class Splash extends Component {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#273746' }}>
         <FadeInView style={{width: 250, height: 50, backgroundColor: 'white', borderRadius: 5 }}>
-          <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>//ANG</Text>
+          <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>///ANG</Text>
         </FadeInView>
       </View>
     )

@@ -83,9 +83,7 @@ export default class HomeScreen extends Component {
                     </Left>
                   </CardItem>
                   <CardItem cardBody>
-                    {/* <Text style={{ height: 200, width: null, flex: 1 }}>{data.img}</Text> */}
                     <Image source={{ uri: 'https://img.kapook.com/u/2016/suppaporn/bkk/temple/temple01.jpg' }} style={{ height: 200, width: null, flex: 1 }} />
-
                   </CardItem>
                   <CardItem style={{ height: 45 }}>
                     <Left>

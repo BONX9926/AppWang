@@ -10,24 +10,48 @@ import {
   StyleSheet,
   Text,
   View,
-  Picker
+  Picker,
+  Alert
 } from 'react-native';
 
 export default class SelectDrop extends Component {
   constructor(props) {
     super(props);
-    this.state = {language: 'java' }
+  }
+  componentDidMount() {
+    return fetch('http://nisakorn.com/student/chanika/index.php/api/getwang')
+      .then((response) => response.json())
+      .then((responseJson) => {
+
+        this.setState({
+          dataDrop: responseJson,
+        }, function () {
+
+        });
+
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
   render() {
     return (
-      <Picker
-        selectedValue={this.state.language}
-        mode="dropdown"
-        style={{ height: 50, width: 100 }}
-        onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
-        <Picker.Item label="Java" value="java" />
-        <Picker.Item label="JavaScript" value="js" />
-      </Picker>
+      <View>{this.props.init}</View>
+      // <Picker
+      //   selectedValue={this.props.init}
+      //   mode="dropdown"
+      //   style={{ height: 50, width: 'auto' }}
+      //   onValueChange={(itemValue, itemIndex) => { Alert.alert(itemValue) }}>
+      //   {/* onValueChange={(itemValue, itemIndex) => this.setState({ inti: itemValue })}> */}
+      //   {
+      //     this.state.dataDrop.map((data, index) => {
+      //       return (
+      //         <Picker.Item key={index} label={data.title} value={data.title} />
+      //       )
+      //     })
+      //   }
+      //   {/* <Picker.Item label="JavaScript" value="js" /> */}
+      // </Picker>
     );
   }
 }

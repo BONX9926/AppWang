@@ -18,7 +18,7 @@ const HomeStack = StackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
-      title: '//ang',
+      title: '///ang',
     },
   },
   Details: {
