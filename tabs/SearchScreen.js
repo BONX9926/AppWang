@@ -16,6 +16,10 @@ export default class SearchScreen extends Component {
     super(props);
     this.state = {
       isLoading: true,
+      start_Lat: 13.7500301,
+      start_Lng: 100.4890995,
+      end_Lat: 13.7500299,
+      end_Lng: 100.4825334
 
     }
   }
@@ -26,11 +30,8 @@ export default class SearchScreen extends Component {
 
         this.setState({
           isLoading: false,
-          dataDrop: responseJson,
-          startLat: 13.75003010,
-          startLng: 100.48909950,
-          endLat: 13.75002990,
-          endLng: 100.48253340,
+          dataDrop: responseJson
+  
         }, function () {
 
         });
@@ -43,12 +44,12 @@ export default class SearchScreen extends Component {
   handleGetDirections = () => {
     let data = {
       source: {
-        latitude: this.state.startLat,
-        longitude: this.state.startLng
+        latitude: Number(this.state.start_Lat),
+        longitude: Number(this.state.start_Lng)
       },
       destination: {
-        latitude: this.state.endLat,
-        longitude: this.state.endLng
+        latitude: Number(this.state.end_Lat),
+        longitude: Number(this.state.end_Lng)
       },
       params: [
         {
@@ -74,19 +75,19 @@ export default class SearchScreen extends Component {
       <View style={{ padding: 8 }}>
         <View style={{ padding: 8 }}>
           <Text>Start:</Text>
-          <Text>{this.state.startLat + ',' + this.state.startLng}</Text>
+          <Text>{this.state.start_Lat + ',' + this.state.start_Lng}</Text>
           <Picker
-            selectedValue={this.state.startLat + ',' + this.state.startLng}
+            selectedValue={this.state.start_Lat + ',' + this.state.start_Lng}
             mode="dialog"
             style={{ height: 50, width: 'auto' }}
-            onValueChange={(itemValue1, itemIndex) => {
-              let res1 = itemValue1.split(",");
-              this.setState({ startLat: res1[0], startLng: res1[1] })
+            onValueChange={(itemValue, itemIndex) => {
+              let res = itemValue.split(",");
+              this.setState({ start_Lat: res[0], start_Lng: res[1] })
             }}>
             {
-              this.state.dataDrop.map((drop1, index) => {
+              this.state.dataDrop.map((drop, index) => {
                 return (
-                  <Picker.Item key={index} label={drop1.title} value={drop1.lat + ',' + drop1.lng} />
+                  <Picker.Item key={index} label={drop.title} value={drop.lat + ',' + drop.lng} />
                 )
               })
             }
@@ -94,20 +95,20 @@ export default class SearchScreen extends Component {
         </View>
         <View style={{ padding: 8 }}>
           <Text>End:</Text>
-          <Text>{this.state.endLat + ',' + this.state.endLng}</Text>
+          <Text>{this.state.end_Lat + ',' + this.state.end_Lng}</Text>
           <Picker
-            selectedValue={this.state.endLat + ',' + this.state.endLng}
+            selectedValue={this.state.end_Lat + ',' + this.state.end_Lng}
             mode="dialog"
             style={{ height: 50, width: 'auto' }}
-            onValueChange={(itemValue2, itemIndex) => {
-              let res2 = itemValue2.split(",");
-              this.setState({ endLat: res2[0], endLng: res2[1] })
+            onValueChange={(itemValue, itemIndex) => {
+              let res = itemValue.split(",");
+              this.setState({ end_Lat: res[0], end_Lng: res[1] })
 
             }}>
             {
-              this.state.dataDrop.map((drop2, index) => {
+              this.state.dataDrop.map((drop, index) => {
                 return (
-                  <Picker.Item key={index} label={drop2.title} value={drop2.lat + ',' + drop2.lng} />
+                  <Picker.Item key={index} label={drop.title} value={drop.lat + ',' + drop.lng} />
                 )
               })
             }
