@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import SelectDrop from '../components/SelectDrop';
 import getDirections from 'react-native-google-maps-directions';
+import { Icon } from 'native-base';
+import { SegmentedControls } from 'react-native-radio-buttons';
 
 export default class SearchScreen extends Component {
   constructor(props) {
@@ -19,8 +21,8 @@ export default class SearchScreen extends Component {
       start_Lat: 13.7500301,
       start_Lng: 100.4890995,
       end_Lat: 13.7500299,
-      end_Lng: 100.4825334
-
+      end_Lng: 100.4825334,
+      selectedOption: 'driving'
     }
   }
   componentDidMount() {
@@ -31,7 +33,7 @@ export default class SearchScreen extends Component {
         this.setState({
           isLoading: false,
           dataDrop: responseJson
-  
+
         }, function () {
 
         });
@@ -54,16 +56,26 @@ export default class SearchScreen extends Component {
       params: [
         {
           key: "travelmode",
-          value: "driving"        // may be "walking", "bicycling" or "transit" as well
+          value: this.state.selectedOption        // may be "walking", "bicycling" or "transit" as well
         }
       ]
     }
-    console.warn('aaaa', data);
-
     getDirections(data)
   }
-  render() {
 
+  setSelectedOption(value){
+    this.setState({
+      selectedOption: value
+    });
+  }
+
+  render() {
+    const options = [
+      'driving',
+      'walking',
+      'bicycling',
+      'transit'
+    ];
     if (this.state.isLoading) {
       return (
         <View style={{ flex: 1, padding: 20 }}>
@@ -72,10 +84,9 @@ export default class SearchScreen extends Component {
       )
     }
     return (
-      <View style={{ padding: 8 }}>
+      <View style={{ padding: 8, display: 'flex' }}>
         <View style={{ padding: 8 }}>
           <Text>Start:</Text>
-          <Text>{this.state.start_Lat + ',' + this.state.start_Lng}</Text>
           <Picker
             selectedValue={this.state.start_Lat + ',' + this.state.start_Lng}
             mode="dialog"
@@ -95,7 +106,6 @@ export default class SearchScreen extends Component {
         </View>
         <View style={{ padding: 8 }}>
           <Text>End:</Text>
-          <Text>{this.state.end_Lat + ',' + this.state.end_Lng}</Text>
           <Picker
             selectedValue={this.state.end_Lat + ',' + this.state.end_Lng}
             mode="dialog"
@@ -113,6 +123,19 @@ export default class SearchScreen extends Component {
               })
             }
           </Picker>
+        </View>
+        <View style={{ padding: 8 }}>
+          <Text>Mode:</Text>
+          <SegmentedControls
+            tint={'#f80046'}
+            selectedTint={'white'}
+            backTint={'#1e2126'}
+            options={options}
+            allowFontScaling={false} // default: true
+            onSelection={ e => this.setSelectedOption(e)}
+            selectedOption={this.state.selectedOption}
+            optionContainerStyle={{ flex: 1 }}
+          />
         </View>
         <Button onPress={this.handleGetDirections} title="Get Directions" />
       </View>

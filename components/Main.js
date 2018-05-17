@@ -49,7 +49,7 @@ export default TabNavigator(
         if (routeName === 'Home') {
           iconName = `ios-home${focused ? '' : '-outline'}`;
         } else if (routeName === 'Search') {
-          iconName = `ios-search${focused ? '' : '-outline'}`;
+          iconName = `ios-navigate${focused ? '' : '-outline'}`;
         } else if (routeName === 'Maps') {
           iconName = `ios-map${focused ? '' : '-outline'}`;
         }
